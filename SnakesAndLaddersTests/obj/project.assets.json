@@ -6034,11 +6034,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Files\\Documents\\Bayteq\\SnakesAndLadders\\SnakesAndLaddersTests\\SnakesAndLaddersTests.csproj",
+      "projectUniqueName": "D:\\Files\\Documents\\GitHub\\SnakesAndLadders\\SnakesAndLaddersTests\\SnakesAndLaddersTests.csproj",
       "projectName": "SnakesAndLaddersTests",
-      "projectPath": "D:\\Files\\Documents\\Bayteq\\SnakesAndLadders\\SnakesAndLaddersTests\\SnakesAndLaddersTests.csproj",
+      "projectPath": "D:\\Files\\Documents\\GitHub\\SnakesAndLadders\\SnakesAndLaddersTests\\SnakesAndLaddersTests.csproj",
       "packagesPath": "C:\\Users\\gamer\\.nuget\\packages\\",
-      "outputPath": "D:\\Files\\Documents\\Bayteq\\SnakesAndLadders\\SnakesAndLaddersTests\\obj\\",
+      "outputPath": "D:\\Files\\Documents\\GitHub\\SnakesAndLadders\\SnakesAndLaddersTests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -6059,8 +6059,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "D:\\Files\\Documents\\Bayteq\\SnakesAndLadders\\SnakesAndLadders\\SnakesAndLadders.csproj": {
-              "projectPath": "D:\\Files\\Documents\\Bayteq\\SnakesAndLadders\\SnakesAndLadders\\SnakesAndLadders.csproj"
+            "D:\\Files\\Documents\\GitHub\\SnakesAndLadders\\SnakesAndLadders\\SnakesAndLadders.csproj": {
+              "projectPath": "D:\\Files\\Documents\\GitHub\\SnakesAndLadders\\SnakesAndLadders\\SnakesAndLadders.csproj"
             }
           }
         }
