@@ -7,16 +7,14 @@ namespace SnakesAndLadders.Model
     {
         public string Name { get; }
         public IList<string> Actions { get; }
-        public bool IsWinner { get; set; }
+        public Guid Id { get; }
 
         private int TokenPosition;
-        public Guid Id { get; }
 
         public Player(string name)
         {
             Name = name;
             Actions = new List<string>() { Constants.Actions.WaitStart };
-            IsWinner = false;
             Id = Guid.NewGuid();
         }
 
@@ -25,7 +23,6 @@ namespace SnakesAndLadders.Model
             Name = name;
             TokenPosition = startPosition;
             Actions = new List<string>() { Constants.Actions.WaitStart };
-            IsWinner = false;
         }
 
         public void PlaceInBoard()

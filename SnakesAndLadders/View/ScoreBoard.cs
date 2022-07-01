@@ -37,7 +37,7 @@ namespace SnakesAndLadders.View
                 }
             }
             Console.WriteLine("Hecho.");
-            Thread.Sleep(200);
+            Thread.Sleep(150);
         }
 
         public static string Line() => 

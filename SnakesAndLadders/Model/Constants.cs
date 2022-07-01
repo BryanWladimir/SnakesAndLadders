@@ -12,5 +12,10 @@ namespace SnakesAndLadders.Model
             public const string MoveToBottomOfSnake = "Baja ficha por serpiente a {0}";
             public const string ReachGoal = "Llega meta";
         }
+
+        public static class Errors
+        {
+            public const string GameOver = "El juego ya ha terminado";
+        }
     }
 }

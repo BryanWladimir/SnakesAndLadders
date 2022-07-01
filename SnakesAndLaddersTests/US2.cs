@@ -39,10 +39,10 @@ namespace SnakesAndLaddersTests
             gameBoard.PlayTurn();
 
             var position = _player.GetTokenPosition();
-            var isWinner = _player.IsWinner;
+            var winner = gameBoard.Winner();
 
             Assert.AreEqual(100, position);
-            Assert.IsTrue(isWinner);
+            Assert.AreEqual(_player, winner);
         }
 
         [TestMethod]
@@ -59,10 +59,10 @@ namespace SnakesAndLaddersTests
             gameBoard.PlayTurn();
 
             var position = _player.GetTokenPosition();
-            var isWinner = _player.IsWinner;
+            var winner = gameBoard.Winner();
 
             Assert.AreEqual(97, position);
-            Assert.IsFalse(isWinner);
+            Assert.AreNotEqual(_player, winner);
         }
 
     }
