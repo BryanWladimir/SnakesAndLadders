@@ -18,8 +18,11 @@ namespace SnakesAndLaddersTests
         public US1()
         {
             _player = new Player("Jugador 1");
-            _gameBoard = new GameBoard(100);
-            _gameBoard.PlacePlayersIntoBoard(new List<Player> { _player });
+            List<Player> players = new List<Player> { _player };
+            var dice = new SimulatedDice(new List<int> { 3, 4});
+            var gameObjects = new List<GameObject>();
+            _gameBoard = new GameBoard(100, players, dice, gameObjects);
+            _gameBoard.PlacePlayersIntoBoard();
         }
 
 
@@ -31,6 +34,7 @@ namespace SnakesAndLaddersTests
             //Then the token is on square 1
             
             var position = _player.GetTokenPosition();
+
             Assert.AreEqual(1, position);
         }
 
@@ -41,9 +45,7 @@ namespace SnakesAndLaddersTests
             //When the token is moved 3 spaces
             //Then the token is on square 4
             
-            var rollDiceResult = 3;
-
-            _gameBoard.MoveTokenByRollDice(_player, rollDiceResult);
+            _gameBoard.PlayTurn();
 
             var position = _player.GetTokenPosition();
 
@@ -56,19 +58,14 @@ namespace SnakesAndLaddersTests
             //Given the token is on square 1
             //When the token is moved 3 spaces
             //And then it is moved 4 spaces
-            //Then the token is on square 8
+            //Then the token is on square 8            
 
-            var rollDiceResult = 3;
-
-            _gameBoard.MoveTokenByRollDice(_player, rollDiceResult);
-
-            var rollDiceResult2 = 4;
-
-            _gameBoard.MoveTokenByRollDice(_player, rollDiceResult2);
+            _gameBoard.PlayTurn();
+            _gameBoard.PlayTurn();
 
             var position = _player.GetTokenPosition();
 
             Assert.AreEqual(8, position);
-        }
+        }        
     }
 }

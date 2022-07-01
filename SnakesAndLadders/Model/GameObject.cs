@@ -1,44 +1,36 @@
-﻿
+﻿using System;
+
 namespace SnakesAndLadders.Model
 {
-    public abstract class GameObject
+    public class GameObject
     {
-        protected int StartSquare;
-        protected int EndSquare;
+        readonly int _from, _to;
+        readonly GameObjectType _type;
 
-        public abstract int GetInitialSquare();
-        public abstract (int, string) MoveTokenByGameObject();
-    }
-
-    public class Snake : GameObject
-    {
-        public Snake(int start, int end)
+        public GameObject(int from, int to, GameObjectType type)
         {
-            StartSquare = start;
-            EndSquare = end;
+            _from = from;
+            _to = to;
+            _type = type;
         }
 
-        public override int GetInitialSquare()
-            => StartSquare;
+        public bool IsInitialSquare(int position) =>
+            _from.Equals(position);
 
+        public int To() =>
+            _to;
 
-        public override (int, string) MoveTokenByGameObject()
-            => (EndSquare, Constants.Actions.MoveToBottomOfSnake);
+        public string GetGameObjectAction() => _type switch
+        {
+            GameObjectType.Snake => Constants.Actions.MoveToBottomOfSnake,
+            GameObjectType.Ladder => Constants.Actions.MoveToTopOfLadder,
+            _ => throw new ArgumentOutOfRangeException()
+        };
     }
 
-    public class Ladder : GameObject
+    public enum GameObjectType
     {
-        public Ladder(int start, int end)
-        {
-            StartSquare = start;
-            EndSquare = end;
-        }
-
-        public override int GetInitialSquare()
-            => StartSquare;
-
-
-        public override (int, string) MoveTokenByGameObject()
-            => (EndSquare, Constants.Actions.MoveToTopOfLadder);
+        Snake,
+        Ladder
     }
 }

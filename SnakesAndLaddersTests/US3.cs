@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SnakesAndLadders.Logic;
 using SnakesAndLadders.Model;
+using System.Collections.Generic;
 
 namespace SnakesAndLaddersTests
 {
@@ -13,13 +14,15 @@ namespace SnakesAndLaddersTests
 
         private readonly Player _player;
         private readonly GameBoard _gameBoard;
-        private readonly Dice _dice;
+        private readonly IDice _dice;
 
         public US3()
         {
             _player = new Player("Jugador 1");
-            _gameBoard = new GameBoard(100);
             _dice = new Dice();
+            List<Player> players = new List<Player> { _player };
+            var gameObjects = new List<GameObject>();
+            _gameBoard = new GameBoard(100, players, _dice, gameObjects);
         }
 
 
@@ -38,16 +41,13 @@ namespace SnakesAndLaddersTests
         [TestMethod]
         public void UAT2()
         {
-            //Given the player rolls a 4
+            //Given the player rolls a n
             //When they move their token
-            //Then the token should move 4 spaces
+            //Then the token should move n spaces
 
-            //var rollDiceResult = _dice.RollDice();
-            var rollDiceResult = 4;
-
-            var initialPosition = _player.GetTokenPosition();
-
-            _gameBoard.MoveTokenByRollDice(_player, rollDiceResult);
+            var initialPosition = _player.GetTokenPosition();            
+            
+            var rollDiceResult = _gameBoard.PlayTurn();
 
             var endPosition = _player.GetTokenPosition();
 

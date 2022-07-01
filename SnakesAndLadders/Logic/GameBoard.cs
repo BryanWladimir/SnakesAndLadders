@@ -6,29 +6,39 @@ namespace SnakesAndLadders.Logic
 {
     public class GameBoard
     {
-        private readonly List<GameObject> gameObjects = new List<GameObject>();
+        private List<GameObject> _gameObjects;
+        private IDice _dice;
+        private List<Player> _players;
         public int GoalSquare { get; }
+        private int _turn;
 
-        public GameBoard(int goalSquare)
+        public GameBoard(int goalSquare, List<Player> players, IDice dice, List<GameObject> gameObjects)
         {
             GoalSquare = goalSquare;
-            FillBoardWithSnakes();
-            FillBoardWithLadders();
+            _players = players;
+            _dice = dice;
+            _gameObjects = gameObjects;
+            _turn = 0;
+            /*FillBoardWithSnakes();
+            FillBoardWithLadders();*/
         }
 
-        public void PlacePlayersIntoBoard(IList<Player> players)
+        public void PlacePlayersIntoBoard()
         {
-            foreach (var player in players)
+            foreach (var player in _players)
                 player.PlaceInBoard();
         }
 
-        public void PlayTurn(Player player, int rollDiceResult)
+        public int PlayTurn()
         {
+            var rollDiceResult = _dice.RollDice();
+            var player = _players[_turn & _players.Count];
             MoveTokenByRollDice(player, rollDiceResult);
             MoveTokenByOnGameObject(player);
+            return rollDiceResult;
         }
 
-        public void MoveTokenByRollDice(Player player, int positionsToMove)
+        private void MoveTokenByRollDice(Player player, int positionsToMove)
         {
             var newPlayerPosition = player.GetTokenPosition() + positionsToMove;
 
@@ -48,18 +58,22 @@ namespace SnakesAndLadders.Logic
             player.IsWinner = true;
         }
 
-        public void MoveTokenByOnGameObject(Player player)
+        private void MoveTokenByOnGameObject(Player player)
         {
-            var gameObject = gameObjects.FirstOrDefault(gameObj => gameObj.GetInitialSquare() == player.GetTokenPosition());
+            var gameObject = _gameObjects.FirstOrDefault(gameObj => gameObj.IsInitialSquare(player.GetTokenPosition()));
 
             if (gameObject is null) return;
 
-            (int newTokenPosition, string action) = gameObject.MoveTokenByGameObject();
+            int newTokenPosition = gameObject.To();
+            string action = gameObject.GetGameObjectAction();
 
             player.MoveTokenPosition(newTokenPosition, action);
         }
 
-        private void FillBoardWithSnakes()
+        public int PlayerPosition(object id) =>
+            _players.First(player => player.Id.Equals(id)).GetTokenPosition();
+
+        /*private void FillBoardWithSnakes()
         {
             var snakes = new List<Snake>
             {
@@ -96,7 +110,7 @@ namespace SnakesAndLadders.Logic
             };
 
             gameObjects.AddRange(ladders);
-        }
+        }*/
     }
 
 

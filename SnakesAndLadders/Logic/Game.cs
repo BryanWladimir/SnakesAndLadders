@@ -13,7 +13,7 @@ namespace SnakesAndLadders.Logic
         private readonly Dice dice;
         private readonly GameBoard gameBoard;
 
-        public Game(IList<string> playerNames, int totalSquares)
+        /*public Game(IList<string> playerNames, int totalSquares)
         {
             Players = playerNames.Select(player => new Player(player)).ToList();
             GoalSquare = totalSquares;
@@ -57,6 +57,6 @@ namespace SnakesAndLadders.Logic
             Console.Clear();
             Console.WriteLine($"JUGADOR {Players.First(player => player.IsWinner).Name} ES EL GANADOR!!!");
             ScoreBoard.PrintScoreBoard(Players, GoalSquare);
-        }
+        }*/
     }
 }

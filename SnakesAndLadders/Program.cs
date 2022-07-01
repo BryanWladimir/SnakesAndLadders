@@ -23,10 +23,10 @@ namespace SnakesAndLadders
             var players = AskForPlayers(gameSettings.MinPlayers, gameSettings.MaxPlayers);
 
             //Configurar juego
-            var game = new Game(players,gameSettings.Squares);
+            /*var game = new Game(players,gameSettings.Squares);
 
             //Iniciar juego
-            game.Init();
+            game.Init();*/
 
             Console.ReadKey();
         }
