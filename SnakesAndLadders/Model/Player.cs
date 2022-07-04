@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SnakesAndLadders.Model
 {
@@ -6,7 +7,7 @@ namespace SnakesAndLadders.Model
     {
         public string Name { get; }
         public IList<string> Actions { get; }
-        public bool IsWinner { get; set; }
+        public Guid Id { get; }
 
         private int TokenPosition;
 
@@ -14,7 +15,7 @@ namespace SnakesAndLadders.Model
         {
             Name = name;
             Actions = new List<string>() { Constants.Actions.WaitStart };
-            IsWinner = false;
+            Id = Guid.NewGuid();
         }
 
         public Player(string name, int startPosition)
@@ -22,7 +23,6 @@ namespace SnakesAndLadders.Model
             Name = name;
             TokenPosition = startPosition;
             Actions = new List<string>() { Constants.Actions.WaitStart };
-            IsWinner = false;
         }
 
         public void PlaceInBoard()

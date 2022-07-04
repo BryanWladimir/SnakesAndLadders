@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SnakesAndLadders.Logic;
 using SnakesAndLadders.Model;
+using System.Collections.Generic;
 
 namespace SnakesAndLaddersTests
 {
@@ -12,12 +13,15 @@ namespace SnakesAndLaddersTests
         //So that I can gloat to everyone around
 
         private readonly Player _player;
-        private readonly GameBoard _gameBoard;
+        private readonly List<GameObject> _gameObjects;
+        private readonly List<Player> _players;
 
         public US2()
         {
             _player = new Player("Jugador 1", 97);
-            _gameBoard = new GameBoard(100);
+            _players = new List<Player> { _player };
+            _gameObjects = new List<GameObject>();
+
         }
 
 
@@ -29,16 +33,16 @@ namespace SnakesAndLaddersTests
             //Then the token is on square 100
             //And the player has won the game
 
-            var rollDiceResult = 3;
+            var dice = new SimulatedDice(new List<int> { 3 });
+            var gameBoard = new GameBoard(100, _players, dice, _gameObjects);
 
-            _gameBoard.MoveTokenByRollDice(_player, rollDiceResult);
+            gameBoard.PlayTurn();
 
             var position = _player.GetTokenPosition();
-
-            var isWinner = _player.IsWinner;
+            var winner = gameBoard.Winner();
 
             Assert.AreEqual(100, position);
-            Assert.IsTrue(isWinner);
+            Assert.AreEqual(_player, winner);
         }
 
         [TestMethod]
@@ -49,17 +53,17 @@ namespace SnakesAndLaddersTests
             //Then the token is on square 97
             //And the player has not won the game
 
-            var rollDiceResult = 4;
+            var dice = new SimulatedDice(new List<int> { 4 });
+            var gameBoard = new GameBoard(100, _players, dice, _gameObjects);
 
-            _gameBoard.MoveTokenByRollDice(_player, rollDiceResult);
+            gameBoard.PlayTurn();
 
             var position = _player.GetTokenPosition();
-
-            var isWinner = _player.IsWinner;
+            var winner = gameBoard.Winner();
 
             Assert.AreEqual(97, position);
-            Assert.IsFalse(isWinner);
+            Assert.AreNotEqual(_player, winner);
         }
-        
+
     }
 }
